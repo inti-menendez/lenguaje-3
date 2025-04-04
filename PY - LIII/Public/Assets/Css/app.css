@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    height: 100%;  
+}
+.login-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.main-body{
+    display: flex;
+}
+.form-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form-login label{ 
+    margin-bottom: 2px;
+}
+.form-login input{
+    margin-bottom: 6px;
+}
+aside{
+    margin-top: 10px;
+}
+.main-container{
+    margin-left: 40px;
+}
+table, tr, th, td{
+    margin-top: 6px;
+    border: 2px solid black;
+}
+
+.form-users{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 8px;
+}
