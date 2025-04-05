@@ -40,7 +40,45 @@
         }
 
         public function edit(User $user){
-            
+            try {
+                $id = $user->getId();
+                $name = $user->getName();
+                $lastName = $user->getLastName();
+                $username = $user->getUsername();
+                $email = $user->getEmail();
+                $telephone = $user->getTelephone();
+                $password = password_hash($user->getPassword(), PASSWORD_BCRYPT);
+                $status = $user->getStatus();
+                $role = $user->getRole();
+
+                $query = "UPDATE users SET name=:name, last_name=:last_name, username=:username, email=:email, telephone=:telephone, password=:password, status=:status, role_id=:role_id WHERE id=:id";
+                
+                $preparation = $this->db->prepare($query);
+                $preparation->bindParam(":id", $id);
+                $preparation->bindParam(":name", $name);
+                $preparation->bindParam(":last_name", $lastName);
+                $preparation->bindParam(":username", $username);
+                $preparation->bindParam(":email", $email);
+                $preparation->bindParam(":telephone", $telephone);
+                if ($password) {
+                    $preparation->bindParam(":password", $password);
+                }
+                if ($status) {
+                    $preparation->bindParam(":status", $status);
+                }
+                if ($role) {
+                    $preparation->bindParam(":role_id", $role);
+                }
+
+                //ejecutamos la consulta
+
+                if($preparation->execute()){
+                    return true;
+                }
+
+            } catch (PDOException $exception) {
+                echo "Error: " .  $exception->getMessage();
+            }        
             
         }
 

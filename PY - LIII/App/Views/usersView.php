@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PY - LPIII</title>
     <link rel="stylesheet" href="Public/Assets/Css/app.css">
+    <script>
+    function fillEditForm(button) {
+        const modal = document.getElementById('editUserModal');
+        modal.querySelector('input[name="id"]').value = button.dataset.id;
+        modal.querySelector('input[name="name"]').value = button.dataset.name;
+        modal.querySelector('input[name="lastName"]').value = button.dataset.lastname;
+        modal.querySelector('input[name="username"]').value = button.dataset.username;
+        modal.querySelector('input[name="email"]').value = button.dataset.email;
+        modal.querySelector('input[name="telephone"]').value = button.dataset.telephone;
+        modal.querySelector('select[name="role"]').value = button.dataset.role;
+    }
+
+    function fillDeleteForm(button) {
+        const deleteModal = document.getElementById('deleteUserModal');
+        deleteModal.querySelector('input[name="id"]').value = button.dataset.id;
+    }
+</script>
 </head>
 <body class="main-body">
     <?php require_once __DIR__ . '../Partials/aside.php'; ?>
@@ -37,7 +54,21 @@
                             <td><?= $user['telephone'] ?></td>
                             <td><?php if($user['role_id'] == 1){ echo "Administrador"; } else {echo "Usuario";} ?></td>
                             <td><button> <?php // insertar ternaria chulita ?> Habilitado </button></td>
-                            <td><button onclick="window.editUserModal.showModal();"> Editar </button> <button onclick="window.deleteUserModal.showModal();"> Eliminar </button></td>
+                            <td>
+                                <button data-id="<?= $user['id'] ?>" 
+                                        data-name="<?= $user['name'] ?>" 
+                                        data-lastname="<?= $user['last_name'] ?>" 
+                                        data-username="<?= $user['username'] ?>" 
+                                        data-email="<?= $user['email'] ?>" 
+                                        data-telephone="<?= $user['telephone'] ?>" 
+                                        data-role="<?= $user['role_id'] ?>" 
+                                        onclick="window.editUserModal.showModal();fillEditForm(this); ">
+                                    Editar
+                                </button>
+
+                                      
+                            <button onclick="window.deleteUserModal.showModal(); fillDeleteForm(this)" data-id=<?=$user['id']?>> Eliminar </button></td>
+                            
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -52,6 +83,7 @@
         <dialog name="registerUserModal" id="registerUserModal" closedby="any">
             <h3>Registro de usuarios</h3>
             <form action="registerUser" method="post" class="form-users">
+                
                 <label for="name">Nombre:</label>
                     <input type="text" name="name" id="name">
                 <label for="lastName">Apellido:</label>
@@ -81,6 +113,7 @@
         <dialog name="editUserModal" id="editUserModal" closedby="any">
             <h3>Edición de usuarios</h3>
             <form action="editUser" method="post" class="form-users">
+            <input type="hidden" name="id" id="id">
                 <label for="name">Nombre:</label>
                     <input type="text" name="name" id="name">
                 <label for="lastName">Apellido:</label>
@@ -108,8 +141,9 @@
         </dialog>
 
         <dialog name="deleteUserModal" id="deleteUserModal" closedby="any">
-            <h3>¿Seguro que desea eliminar al siguiente usuario: Nombre?</h3>
+            <h3>¿Seguro que desea eliminar este usuario?</h3>
                 <form action="deleteUser" method="post" class="form-users">
+                    <input type="text" name=id>
                     <button type="submit"> Confirmar </button>
                 </form>
             <button type="button" onclick="window.deleteUserModal.close();">Cerrar</button>
@@ -119,3 +153,4 @@
 
 </body>
 </html>
+

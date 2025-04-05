@@ -8,7 +8,8 @@
                 'authLogin' => 'App/Controllers/authLoginController.php',
                 'main' => 'App/Views/mainView.php',
                 'users' => 'users',
-                'registerUser' => 'App/Controllers/registerUserController.php'
+                'registerUser' => 'App/Controllers/registerUserController.php',
+                'editUser' => 'App/Controllers/EditUserController.php'
             ];
 
             if (array_key_exists($route, $routes)) {
