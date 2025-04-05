@@ -9,7 +9,8 @@
                 'main' => 'App/Views/mainView.php',
                 'users' => 'users',
                 'registerUser' => 'App/Controllers/registerUserController.php',
-                'editUser' => 'App/Controllers/EditUserController.php'
+                'editUser' => 'App/Controllers/EditUserController.php',
+                'deleteUser' => 'App/Controllers/deleteUserController.php'
             ];
 
             if (array_key_exists($route, $routes)) {

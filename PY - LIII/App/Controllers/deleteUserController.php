@@ -1,3 +1,4 @@
 <?php 
+
 $userController = new UserController();
-$userController->updateUser();
+$userController->deleteUser();
